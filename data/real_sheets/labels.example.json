@@ -1,0 +1,7 @@
+{
+  "sheets": [
+    {"file": "sheet01.jpg", "marks": [3, 5, 7, 4, 6], "total": 25},
+    {"file": "sheet02.jpg", "marks": [5, 8, 9, 6, 7], "total": 35},
+    {"file": "sheet03.jpg", "marks": [2, 1, 4, 0, 3], "total": 12}
+  ]
+}
