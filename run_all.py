@@ -8,8 +8,8 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-STEPS = ["00_make_template", "01_generate_sheets", "02_evolve", "03_distill", "05_make_figures", "06_analysis_report"]
-QUICK_AWARE = {"01_generate_sheets", "02_evolve", "03_distill"}
+STEPS = ["00_make_template", "01_generate_sheets", "02_evolve", "03_distill", "07_noise_floor", "05_make_figures", "06_analysis_report"]
+QUICK_AWARE = {"01_generate_sheets", "02_evolve", "03_distill", "07_noise_floor"}
 
 
 def main() -> None:

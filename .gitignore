@@ -3,6 +3,16 @@ __pycache__/
 data/mnist/
 data/generated/
 archive/
-results/
+# results/: keep the small deliverables (tables, JSON, figures, report); ignore bulky/regenerable files
+results/*
+!results/analysis_report.md
+!results/results_table.csv
+!results/results_table.md
+!results/distill_results.json
+!results/evolution_summary.json
+!results/noise_floor.json
+!results/noise_floor.md
+!results/figures/
 template/
 .pytest_cache/
+prof.out
