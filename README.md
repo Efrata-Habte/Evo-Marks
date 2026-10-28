@@ -24,7 +24,7 @@ python demo.py photo.jpg           # read one photo (--version best|v000|student
 python -m pytest tests -q          # 25 tests, a few seconds
 ```
 `python run_all.py --clean` wipes `data/generated`, `archive`, `results` first. `--final` also runs the one-time real-sheet test
-(see `data/real_sheets/README.md`; **not run yet**). Reading order for the code: `docs/WALKTHROUGH.md`.
+(see `data/real_sheets/README.md`; **not run yet**). Architecture: `docs/ARCHITECTURE.md`; written report: `docs/REPORT.md`.
 
 ## Results (default run, full mode, synthetic **test** split: 750 sheets, writers never seen in training)
 Measured by `python run_all.py` (746 s total; `results/results_table.md`). Students: mean +- std over 3 seeds; teachers: one training each.
@@ -67,5 +67,5 @@ small budgets and few seeds; latency measured on one machine, noisy at sub-milli
 
 ## Layout
 `config.py` all settings · `run_all.py` · `scripts/` steps 00-07 (07 = noise floor) · `evolvable/` the two editable seed files · `evomarks/` fixed library ·
-`app/` Streamlit · `demo.py` · `tests/` · `docs/` (ARCHITECTURE, WALKTHROUGH, CONCEPTS, REPORT_DRAFT, SLIDES_OUTLINE).
+`app/` Streamlit · `demo.py` · `tests/` · `docs/` (ARCHITECTURE, REPORT, slides).
 Reproducibility: sheets are generated from code with fixed seeds; re-running the same settings reproduces the same numbers.
