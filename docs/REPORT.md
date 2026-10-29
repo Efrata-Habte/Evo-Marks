@@ -7,9 +7,12 @@ It covers both tracks: **Track A** (a bounded recursive-improvement loop with an
 ## 2. Method
 **Data.** A sheet has 5 marks (maxima 5, 8, 9, 6, 7) and a 2-digit total: 7 digit boxes. Sheets are built from MNIST digits with fixed seeds; about 5% get a genuinely wrong total. Splits (sheets): `seed` 150 (labeled), `pool` 3000 (unlabeled), `dev` 300 (gates), `meta_dev` 300 (Level 2 gate only), `test` 750 (MNIST-test writers, read once, reporting only). No image is in two splits.
 
-**Level 0, verified self-training.** The teacher reads pool sheets. A sheet's digits become pseudo-labels only if each mark is within its maximum and the marks sum to the read total. A copy trained on them replaces the teacher only if dev accuracy rises by 0.002 and no digit class drops more than 5 points; otherwise rollback.**
-**Level 1, self-modifying code.** An improver edits `pipeline.py` (constants, preprocessing/augmentation blocks, model size) with AST operators. A fixed evaluator runs each candidate in a sandboxed subprocess under one small budget and scores dev accuracy; every version is archived, accepted or rejected, with its reason. Static checks and SHA-256 tamper hashes protect the evaluator, data and tests (184 checks, 0 violations).**
+**Level 0, verified self-training.** The teacher reads pool sheets. A sheet's digits become pseudo-labels only if each mark is within its maximum and the marks sum to the read total. A copy trained on them replaces the teacher only if dev accuracy rises by 0.002 and no digit class drops more than 5 points; otherwise rollback.
+
+**Level 1, self-modifying code.** An improver edits `pipeline.py` (constants, preprocessing/augmentation blocks, model size) with AST operators. A fixed evaluator runs each candidate in a sandboxed subprocess under one small budget and scores dev accuracy; every version is archived, accepted or rejected, with its reason. Static checks and SHA-256 tamper hashes protect the evaluator, data and tests (184 checks, 0 violations).
+
 **Level 2, the recursive step.** Every 5 generations the improver edits its own source; it is kept only if its utility (mean meta_dev gain of its proposed edits from a fixed parent, same random seeds) beats the old improver by 0.001.
+
 **Track B.** Loss `alpha CE + (1-alpha) T^2 KL`. A 25k-parameter MLP student is trained on the same data (seed digits plus the best teacher's accepted pseudo-labels) as a hard-label baseline and distilled from v000 and from the best teacher. T and alpha are chosen on dev; 3 seeds; reported on test.
 
 **Reproducibility.** CPU only (12 cores); latency is one thread, median of 200 runs, preprocessing included. `python run_all.py` rebuilds everything (evolution about 11.5 min); a re-run reproduced every accuracy exactly (only latency varies).
